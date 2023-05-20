@@ -58,6 +58,8 @@
         <java-statsd-client.version>3.1.0</java-statsd-client.version>
         <javax-inject.version>1</javax-inject.version>
 
+        <bit.common.version>1.0.0-SNAPSHOT</bit.common.version>
+
     </properties>
 
     <profiles>
@@ -125,10 +127,165 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco-maven-plugin.version}</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>**/*ServiceApplicationBootstrap.class</exclude>
+                            <exclude>**/*MapperImpl.class</exclude>
+                            <exclude>**/model/Q*.class</exclude>
+                        </excludes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>${git-commit-id.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>pl.com.bit</groupId>
+                <artifactId>common</artifactId>
+                <version>${bit.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.com.bit</groupId>
+                <artifactId>common-feign</artifactId>
+                <version>${bit.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.com.bit</groupId>
+                <artifactId>common-api</artifactId>
+                <version>${bit.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.com.bit</groupId>
+                <artifactId>http-problem-spring-boot-starter</artifactId>
+                <version>${bit.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.com.bit</groupId>
+                <artifactId>http-problem</artifactId>
+                <version>${bit.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${flyway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.neovisionaries</groupId>
+                <artifactId>nv-i18n</artifactId>
+                <version>${nv-i18n.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.javamoney</groupId>
+                <artifactId>moneta</artifactId>
+                <version>${moneta.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jadira.usertype</groupId>
+                <artifactId>usertype.core</artifactId>
+                <version>${usertype-core.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.hibernate</groupId>
+                        <artifactId>hibernate-entitymanager</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-core</artifactId>
+                <version>${tika-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.mkopylec</groupId>
+                <artifactId>recaptcha-spring-boot-starter</artifactId>
+                <version>${recaptcha-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>${rest-assured.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson-annotation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${model-mapper.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
 
     <repositories>
         <repository>
