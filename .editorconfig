@@ -1,0 +1,30 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.java]
+indent_size = 4
+ij_java_names_count_to_use_import_on_demand = 9999
+ij_java_class_count_to_use_import_on_demand = 9999
+ij_continuation_indent_size = 4
+
+[*.groovy]
+indent_size = 4
+ij_groovy_label_indent_size = 4
+ij_groovy_names_count_to_use_import_on_demand = 9999
+ij_groovy_class_count_to_use_import_on_demand = 9999
+
+[*.sql]
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{yml,yaml}]
+ij_yaml_spaces_within_brackets = false
